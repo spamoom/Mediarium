@@ -3901,7 +3901,7 @@
   "Singles": "Singles",
   "Site address": "Endereço do site",
   "Site definitions": "Definições de sites",
-  "Sites behind a Cloudflare check are fetched by FlareSolverr from its own network, so they see that address (your server address for the built-in one), not the VPN's. Some may also stop working.": "Os sites protegidos por uma verificação da Cloudflare são obtidos pelo FlareSolverr a partir da sua própria rede, por isso veem esse endereço (o endereço do seu servidor, no caso do integrado), não o da VPN. Alguns também podem deixar de funcionar.",
+  "Sites behind a Cloudflare check are fetched by FlareSolverr from its own network, so they see that address, not the VPN's. Some may also stop working. Only a FlareSolverr on this machine, like the built-in one, goes through the VPN.": "Os sites protegidos por uma verificação da Cloudflare são obtidos pelo FlareSolverr a partir da sua própria rede, por isso veem esse endereço, não o da VPN. Alguns também podem deixar de funcionar. Só um FlareSolverr nesta máquina, como o integrado, passa pela VPN.",
   "Sites that write dates in their own way": "Sites que escrevem as datas do seu próprio jeito",
   "Sites with a Cloudflare check are fetched through this helper. Leave it empty to turn the helper off, or to use the built-in one if you have it.": "Os sites com verificação da Cloudflare são obtidos através deste assistente. Deixe vazio para desativar o assistente, ou para usar o integrado, se o tiver.",
   "Sites with a Cloudflare check will fail until it's back. If it stays down, restart the container.": "Os sites com verificação da Cloudflare vão falhar até ela voltar. Se continuar em baixo, reinicie o contentor.",

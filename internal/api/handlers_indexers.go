@@ -447,7 +447,7 @@ func (s *Server) testIndexerInstance(ctx context.Context, inst indexers.Instance
 		return connTestResult{Message: "Signed in and searched, but the site returned no releases. Try updating the site list."}
 	}
 	msg := fmt.Sprintf("Connected. The site returned %s.", plural(res.Releases, "recent release"))
-	if res.ViaFlareSolverr && s.vpnForIndexers() {
+	if res.ViaFlareSolverr && s.vpnForIndexers() && !s.flareSolverrOnVPN() {
 		msg += " FlareSolverr fetched it past Cloudflare, so the site saw FlareSolverr's address, not your VPN's."
 	}
 	return connTestResult{OK: true, Message: msg}

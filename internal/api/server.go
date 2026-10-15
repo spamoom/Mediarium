@@ -237,6 +237,7 @@ func New(db *sql.DB, cfg config.Config, box *crypto.Box, defaultTMDBAPIKey, vers
 	s.Definitions = indexers.NewDefinitionStore(filepath.Join(cfg.ConfigDir, "indexer-definitions"))
 	s.Definitions.CustomDir = filepath.Join(cfg.ConfigDir, "indexer-definitions-custom")
 	s.Cardigann = indexers.NewCardigannManager(s.Definitions, s.flareSolverrURL)
+	s.Cardigann.FlareSolverrProxy = s.flareSolverrProxy
 	s.IndexerRepo.SetCardigann(s.Cardigann)
 	s.setupSearchExtras()
 	s.instrumentTMDB(s.tmdb)

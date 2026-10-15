@@ -8,6 +8,9 @@ under [Unreleased]. How releases are cut: [docs/RELEASING.md](docs/RELEASING.md)
 
 ## [Unreleased]
 
+### Fixed
+- **FlareSolverr and indexers through the VPN**: with **Send indexer traffic through the VPN** on, the built-in FlareSolverr fetched sites from your server address while Mediarium used the VPN's. Cloudflare's pass didn't carry over, so every page of a site like 1337x went through FlareSolverr and the test could run out of time. The built-in FlareSolverr (or one at `localhost`) now goes through the VPN as well, and the warning only shows for a FlareSolverr elsewhere.
+
 ## [3.1.0] - 2026-10-14
 
 ### Added

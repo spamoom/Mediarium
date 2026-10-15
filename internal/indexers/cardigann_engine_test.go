@@ -471,10 +471,13 @@ func TestCardigannCloudflareViaFlareSolverr(t *testing.T) {
 			Cmd        string `json:"cmd"`
 			URL        string `json:"url"`
 			MaxTimeout int    `json:"maxTimeout"`
+			Proxy      struct {
+				URL string `json:"url"`
+			} `json:"proxy"`
 		}
 		json.NewDecoder(r.Body).Decode(&req)
 		calls.Add(1)
-		if req.Cmd != "request.get" || req.MaxTimeout <= 0 {
+		if req.Cmd != "request.get" || req.MaxTimeout <= 0 || req.Proxy.URL != "socks5://127.0.0.1:1080" {
 			t.Errorf("bad FlareSolverr request %+v", req)
 		}
 		u, _ := url.Parse(req.URL)
@@ -491,6 +494,7 @@ func TestCardigannCloudflareViaFlareSolverr(t *testing.T) {
 
 	m := fixtureManager(t, "fixturepublic")
 	m.FlareSolverrURL = func() string { return fs.URL + "/" }
+	m.FlareSolverrProxy = func() (string, error) { return "socks5://127.0.0.1:1080", nil }
 	inst := Instance{ID: 1, Name: "CF Site", Kind: KindCardigann, DefinitionID: "fixturepublic", BaseURL: site.URL}
 	res, err := m.Search(context.Background(), inst, "the fixture movie", []int{2000})
 	if err != nil {

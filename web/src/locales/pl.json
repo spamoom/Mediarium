@@ -3959,7 +3959,7 @@
   "Singles": "Single",
   "Site address": "Adres strony",
   "Site definitions": "Definicje stron",
-  "Sites behind a Cloudflare check are fetched by FlareSolverr from its own network, so they see that address (your server address for the built-in one), not the VPN's. Some may also stop working.": "Strony za kontrolą Cloudflare pobiera FlareSolverr z własnej sieci, więc widzą ten adres (adres twojego serwera w przypadku wbudowanego), a nie adres VPN. Niektóre mogą też przestać działać.",
+  "Sites behind a Cloudflare check are fetched by FlareSolverr from its own network, so they see that address, not the VPN's. Some may also stop working. Only a FlareSolverr on this machine, like the built-in one, goes through the VPN.": "Strony za kontrolą Cloudflare pobiera FlareSolverr z własnej sieci, więc widzą ten adres, a nie adres VPN. Niektóre mogą też przestać działać. Przez VPN idzie tylko FlareSolverr na tym komputerze, na przykład wbudowany.",
   "Sites that write dates in their own way": "Strony, które zapisują daty po swojemu",
   "Sites with a Cloudflare check are fetched through this helper. Leave it empty to turn the helper off, or to use the built-in one if you have it.": "Strony z weryfikacją Cloudflare są pobierane przez tego pomocnika. Zostaw puste, by go wyłączyć albo użyć wbudowanego, jeśli go masz.",
   "Sites with a Cloudflare check will fail until it's back. If it stays down, restart the container.": "Strony ze sprawdzaniem Cloudflare będą się nie udawać, dopóki nie wróci. Jeśli nadal nie działa, zrestartuj kontener.",

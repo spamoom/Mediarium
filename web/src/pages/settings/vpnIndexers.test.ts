@@ -1,14 +1,16 @@
 // Run with: npm test (uses node's built-in test runner, no extra packages).
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { flareSolverrSetUp } from './vpnIndexers.ts'
+import { flareSolverrOutsideVPN } from './vpnIndexers.ts'
 
-test('no FlareSolverr: no warning needed', () => {
-  assert.equal(flareSolverrSetUp({}), false)
-  assert.equal(flareSolverrSetUp({ flareSolverrUrl: '  ' }), false)
+test('no FlareSolverr, or the built-in one: no warning needed', () => {
+  assert.equal(flareSolverrOutsideVPN({}), false)
+  assert.equal(flareSolverrOutsideVPN({ flareSolverrUrl: '  ' }), false)
+  assert.equal(flareSolverrOutsideVPN({ flareSolverrUrl: 'http://127.0.0.1:8191' }), false)
+  assert.equal(flareSolverrOutsideVPN({ flareSolverrUrl: 'http://localhost:8191/' }), false)
 })
 
-test('a saved address or the built-in one counts', () => {
-  assert.equal(flareSolverrSetUp({ flareSolverrUrl: 'http://flaresolverr:8191' }), true)
-  assert.equal(flareSolverrSetUp({ flareSolverrBundled: true }), true)
+test('one at another address fetches outside the VPN', () => {
+  assert.equal(flareSolverrOutsideVPN({ flareSolverrUrl: 'http://flaresolverr:8191' }), true)
+  assert.equal(flareSolverrOutsideVPN({ flareSolverrUrl: 'http://192.168.1.20:8191' }), true)
 })

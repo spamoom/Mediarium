@@ -11,7 +11,7 @@ import { parseWireGuardConf, type WireGuardConf } from '../../wgConf'
 import { OTHER_PROVIDER, confHints, providerName, vpnProviders } from '../../vpnProviders'
 import { t, st } from '../../i18n'
 import TipLabel from '../../components/TipLabel'
-import { flareSolverrSetUp } from './vpnIndexers'
+import { flareSolverrOutsideVPN } from './vpnIndexers'
 
 function VPNSection() {
   const [list, setList] = useState<VPNConfig[]>([])
@@ -48,7 +48,7 @@ function VPNSection() {
   )
   const [flareSolverr, setFlareSolverr] = useState(false)
   useEffect(() => {
-    api.getSettings().then((s) => setFlareSolverr(flareSolverrSetUp(s))).catch(() => undefined)
+    api.getSettings().then((s) => setFlareSolverr(flareSolverrOutsideVPN(s))).catch(() => undefined)
   }, [])
   const [egressIp, setEgressIp] = useState('')
   const [egressIpStatus, setEgressIpStatus] = useState('')
@@ -295,7 +295,7 @@ function VPNSection() {
         />
         {indexers.value && flareSolverr && (
           <div className="notice notice-warn">
-            {t("Sites behind a Cloudflare check are fetched by FlareSolverr from its own network, so they see that address (your server address for the built-in one), not the VPN's. Some may also stop working.")}
+            {t("Sites behind a Cloudflare check are fetched by FlareSolverr from its own network, so they see that address, not the VPN's. Some may also stop working. Only a FlareSolverr on this machine, like the built-in one, goes through the VPN.")}
           </div>
         )}
       </section>

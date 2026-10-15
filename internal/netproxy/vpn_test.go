@@ -205,3 +205,31 @@ func TestVPNPerHopAndNewTunnel(t *testing.T) {
 		t.Fatalf("old tunnel carried %d, new one %d; want 1 and 1", first.carried.Load(), second.carried.Load())
 	}
 }
+
+func TestVPNProxyForFlareSolverr(t *testing.T) {
+	t.Cleanup(func() { SetVPN(nil, nil) })
+	if u, err := VPNProxyURL(); u != "" || err != nil {
+		t.Fatalf("no VPN for indexers, yet a proxy: %q %v", u, err)
+	}
+	tgt := target(t)
+	tun := &fakeTunnel{to: hostOf(tgt)}
+	vpn := &fakeVPN{tunnel: tun, label: "My VPN"}
+	SetVPN(vpn, map[Use]bool{Indexers: true})
+	raw, err := VPNProxyURL()
+	if err != nil || !strings.HasPrefix(raw, "socks5://127.0.0.1:") {
+		t.Fatalf("proxy url: %q %v", raw, err)
+	}
+	c := &http.Client{Timeout: 5 * time.Second, Transport: &http.Transport{Proxy: http.ProxyURL(mustParse(t, raw))}}
+
+	if body, err := get(t, c, "http://indexer.example.com/api"); err != nil || body != "hello" || tun.carried.Load() != 1 {
+		t.Fatalf("through the proxy: %q %v, tunnel carried %d", body, err, tun.carried.Load())
+	}
+	// Only the VPN: no local addresses, and nothing while it's down.
+	if _, err := get(t, c, tgt.URL); err == nil {
+		t.Fatal("a local address went through the VPN proxy")
+	}
+	vpn.tunnel = nil
+	if _, err := get(t, c, "http://other.example.com/api"); err == nil {
+		t.Fatal("the VPN proxy connected while the VPN was down")
+	}
+}

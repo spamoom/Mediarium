@@ -42,3 +42,18 @@ func TestProbeFlareSolverrUnreachable(t *testing.T) {
 		t.Fatal("a closed port must not count as running")
 	}
 }
+
+func TestOnThisMachine(t *testing.T) {
+	for raw, want := range map[string]bool{
+		bundledFlareSolverrURL:     true,
+		"http://localhost:8191/":   true,
+		"http://[::1]:8191":        true,
+		"http://flaresolverr:8191": false,
+		"http://192.168.1.20:8191": false,
+		"":                         false,
+	} {
+		if got := onThisMachine(raw); got != want {
+			t.Errorf("onThisMachine(%q) = %v, want %v", raw, got, want)
+		}
+	}
+}

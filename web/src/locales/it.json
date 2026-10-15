@@ -3901,7 +3901,7 @@
   "Singles": "Singoli",
   "Site address": "Indirizzo del sito",
   "Site definitions": "Definizioni dei siti",
-  "Sites behind a Cloudflare check are fetched by FlareSolverr from its own network, so they see that address (your server address for the built-in one), not the VPN's. Some may also stop working.": "FlareSolverr recupera i siti dietro un controllo Cloudflare dalla propria rete, quindi vedono quell'indirizzo (quello del tuo server per quello integrato) e non quello della VPN. Alcuni potrebbero anche smettere di funzionare.",
+  "Sites behind a Cloudflare check are fetched by FlareSolverr from its own network, so they see that address, not the VPN's. Some may also stop working. Only a FlareSolverr on this machine, like the built-in one, goes through the VPN.": "FlareSolverr recupera i siti dietro un controllo Cloudflare dalla propria rete, quindi vedono quell'indirizzo e non quello della VPN. Alcuni potrebbero anche smettere di funzionare. Solo un FlareSolverr su questa macchina, come quello integrato, passa dalla VPN.",
   "Sites that write dates in their own way": "Siti che scrivono le date a modo loro",
   "Sites with a Cloudflare check are fetched through this helper. Leave it empty to turn the helper off, or to use the built-in one if you have it.": "I siti con un controllo Cloudflare vengono letti tramite questo aiutante. Lascia vuoto per disattivarlo, o per usare quello integrato se ce l'hai.",
   "Sites with a Cloudflare check will fail until it's back. If it stays down, restart the container.": "I siti con il controllo Cloudflare non funzioneranno finché non torna attivo. Se resta fermo, riavvia il container.",

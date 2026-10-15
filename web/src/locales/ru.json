@@ -3959,7 +3959,7 @@
   "Singles": "Синглы",
   "Site address": "Адрес сайта",
   "Site definitions": "Определения сайтов",
-  "Sites behind a Cloudflare check are fetched by FlareSolverr from its own network, so they see that address (your server address for the built-in one), not the VPN's. Some may also stop working.": "Сайты за проверкой Cloudflare FlareSolverr получает из своей сети, поэтому они видят тот адрес (у встроенного это адрес вашего сервера), а не адрес VPN. Некоторые могут перестать работать.",
+  "Sites behind a Cloudflare check are fetched by FlareSolverr from its own network, so they see that address, not the VPN's. Some may also stop working. Only a FlareSolverr on this machine, like the built-in one, goes through the VPN.": "Сайты за проверкой Cloudflare FlareSolverr получает из своей сети, поэтому они видят тот адрес, а не адрес VPN. Некоторые могут перестать работать. Через VPN идёт только FlareSolverr на этом компьютере, например встроенный.",
   "Sites that write dates in their own way": "Сайты, которые пишут даты по-своему",
   "Sites with a Cloudflare check are fetched through this helper. Leave it empty to turn the helper off, or to use the built-in one if you have it.": "Сайты с проверкой Cloudflare загружаются через этот помощник. Оставьте поле пустым, чтобы выключить помощник или использовать встроенный, если он у вас есть.",
   "Sites with a Cloudflare check will fail until it's back. If it stays down, restart the container.": "Сайты с проверкой Cloudflare не будут работать, пока она не вернётся. Если она так и не заработает, перезапустите контейнер.",

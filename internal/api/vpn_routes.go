@@ -1,6 +1,10 @@
 package api
 
 import (
+	"net"
+	"net/url"
+	"strings"
+
 	"github.com/rdborg/mediarium/internal/netproxy"
 	"github.com/rdborg/mediarium/internal/settings"
 	"github.com/rdborg/mediarium/internal/vpn"
@@ -35,4 +39,31 @@ func (s *Server) vpnForIndexers() bool {
 // torrentTunnel).
 func (s *Server) applyVPNRoutes() {
 	netproxy.SetVPN(vpnRoute{s.VPNManager}, map[netproxy.Use]bool{netproxy.Indexers: s.vpnForIndexers()})
+}
+
+// flareSolverrOnVPN reports whether FlareSolverr's browser goes through the
+// VPN too. Only one on this machine can reach the VPN proxy, which listens on
+// the loopback address.
+func (s *Server) flareSolverrOnVPN() bool {
+	return s.vpnForIndexers() && onThisMachine(s.flareSolverrURL())
+}
+
+// onThisMachine reports whether raw is an address on the loopback interface.
+func onThisMachine(raw string) bool {
+	u, err := url.Parse(raw)
+	if err != nil {
+		return false
+	}
+	host := strings.ToLower(u.Hostname())
+	ip := net.ParseIP(host)
+	return host == "localhost" || ip != nil && ip.IsLoopback()
+}
+
+// flareSolverrProxy is the proxy handed to FlareSolverr, so sites behind a
+// Cloudflare check see the VPN's address and its pass works for Mediarium too.
+func (s *Server) flareSolverrProxy() (string, error) {
+	if !s.flareSolverrOnVPN() {
+		return "", nil
+	}
+	return netproxy.VPNProxyURL()
 }

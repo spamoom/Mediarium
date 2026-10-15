@@ -38,6 +38,9 @@ type CardigannManager struct {
 	// FlareSolverrURL returns the FlareSolverr address from Settings, or ""
 	// when none is set up.
 	FlareSolverrURL func() string
+	// FlareSolverrProxy returns the proxy FlareSolverr's browser should use,
+	// or "" for its own network. Nil means none.
+	FlareSolverrProxy func() (string, error)
 	// Transport is used for every site request; nil means
 	// http.DefaultTransport. Injectable for tests.
 	Transport http.RoundTripper
@@ -616,6 +619,15 @@ func (s *cgSession) solveChallenge(ctx context.Context, fsURL string, r cgReques
 	}
 	if len(cookies) > 0 {
 		payload["cookies"] = cookies
+	}
+	if s.m.FlareSolverrProxy != nil {
+		p, err := s.m.FlareSolverrProxy()
+		if err != nil {
+			return nil, err
+		}
+		if p != "" {
+			payload["proxy"] = map[string]string{"url": p}
+		}
 	}
 	body, err := json.Marshal(payload)
 	if err != nil {

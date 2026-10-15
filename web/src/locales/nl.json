@@ -3901,7 +3901,7 @@
   "Singles": "Singles",
   "Site address": "Siteadres",
   "Site definitions": "Sitedefinities",
-  "Sites behind a Cloudflare check are fetched by FlareSolverr from its own network, so they see that address (your server address for the built-in one), not the VPN's. Some may also stop working.": "Sites achter een Cloudflare-controle worden door FlareSolverr vanuit zijn eigen netwerk opgehaald, dus ze zien dat adres (het adres van je server bij de ingebouwde), niet dat van de VPN. Sommige werken dan misschien niet meer.",
+  "Sites behind a Cloudflare check are fetched by FlareSolverr from its own network, so they see that address, not the VPN's. Some may also stop working. Only a FlareSolverr on this machine, like the built-in one, goes through the VPN.": "Sites achter een Cloudflare-controle worden door FlareSolverr vanuit zijn eigen netwerk opgehaald, dus ze zien dat adres, niet dat van de VPN. Sommige werken dan misschien niet meer. Alleen een FlareSolverr op deze machine, zoals de ingebouwde, gaat via de VPN.",
   "Sites that write dates in their own way": "Sites die datums op hun eigen manier schrijven",
   "Sites with a Cloudflare check are fetched through this helper. Leave it empty to turn the helper off, or to use the built-in one if you have it.": "Sites met een Cloudflare-controle worden via dit hulpje opgehaald. Laat het leeg om het hulpje uit te zetten, of om het ingebouwde te gebruiken als je dat hebt.",
   "Sites with a Cloudflare check will fail until it's back. If it stays down, restart the container.": "Sites met een Cloudflare-controle werken niet totdat het weer terug is. Blijft het uit, start dan de container opnieuw.",
